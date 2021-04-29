@@ -16,9 +16,9 @@ const SignIn = () => {
           <Gap height={16} />
           <Input judul="Password" placeholder="Enter your password" />
           <Gap height={38} />
-          <Button label="Sign in" warnaLatar="#F28F27" />
+          <Button label="Sign in" />
           <Gap height={14} />
-          <Button label="Create New Account" warnaLatar="#8C0900" />
+          <Button label="Create New Account" color="#8C0900" />
         </View>
         <Gap height={90} />
       </View>
