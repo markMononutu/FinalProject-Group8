@@ -17,8 +17,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     color: 'white',
     height: 50,
-    paddingTop: 17,
-    paddingBottom: 15,
     backgroundColor: color,
   }),
   label: textColor => ({
@@ -26,6 +24,8 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: '400',
     color: textColor,
+    paddingTop: 17,
+    paddingBottom: 10,
   }),
 });
 
