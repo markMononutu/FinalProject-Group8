@@ -1,9 +1,9 @@
 import React from 'react';
 import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import {Restaurant} from '../../assets';
-import {Button, Input, Gap} from '../../components/atoms';
+import {Button, Input, Gap} from '../../components';
 
-const SignIn = () => {
+const SignIn = ({navigation}) => {
   const handleSubmit = () => {};
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
@@ -18,7 +18,11 @@ const SignIn = () => {
           <Gap height={38} />
           <Button label="Sign in" />
           <Gap height={14} />
-          <Button label="Create New Account" color="#8C0900" />
+          <Button
+            label="Create New Account"
+            color="#8C0900"
+            onSubmit={() => navigation.navigate('SignUp')}
+          />
         </View>
         <Gap height={90} />
       </View>
