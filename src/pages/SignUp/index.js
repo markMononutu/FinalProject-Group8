@@ -53,15 +53,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 43.5,
     elevation: 4,
   },
-  borderPhoto: {
-    width: 85,
-    height: 80,
-    borderRadius: 110,
-    borderWidth: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderColor: 'white',
-  },
   photoWrapper: {
     paddingLeft: 135,
     paddingRight: 135,
