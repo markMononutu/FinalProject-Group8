@@ -7,15 +7,21 @@ const Header = ({title, onBack}) => {
   return (
     <View style={styles.container}>
       {onBack && (
-        <TouchableOpacity onPress={onBack}>
-          <View style={styles.buttonBack}>
-            <Back />
-          </View>
-        </TouchableOpacity>
+        <View style={styles.row}>
+          <TouchableOpacity onPress={onBack}>
+            <View style={styles.buttonBack}>
+              <Back />
+            </View>
+          </TouchableOpacity>
+          <Gap width={90} />
+          <Text style={styles.text}>{title}</Text>
+        </View>
       )}
-
-      <Gap width={90} />
-      <Text style={styles.text}>{title}</Text>
+      {!onBack && (
+        <View style={styles.noBack}>
+          <Text style={styles.textNoBack}>{title}</Text>
+        </View>
+      )}
     </View>
   );
 };
@@ -25,16 +31,26 @@ export default Header;
 const styles = StyleSheet.create({
   container: {
     marginTop: 10,
-    backgroundColor: 'white',
-    flexDirection: 'row',
-    alignItems: 'center',
   },
   text: {
+    fontSize: 22,
+    color: 'black',
+  },
+  textNoBack: {
+    alignItems: 'center',
+    justifyContent: 'center',
     fontSize: 22,
     color: 'black',
   },
   buttonBack: {
     padding: 10,
     marginLeft: 25,
+  },
+  row: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  noBack: {
+    alignItems: 'center',
   },
 });

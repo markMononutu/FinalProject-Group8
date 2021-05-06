@@ -16,7 +16,10 @@ const SignIn = ({navigation}) => {
           <Gap height={16} />
           <Input judul="Password" placeholder="Enter your password" />
           <Gap height={38} />
-          <Button label="Sign in" />
+          <Button
+            label="Sign in"
+            onSubmit={() => navigation.navigate('Menu')}
+          />
           <Gap height={14} />
           <Button
             label="Create New Account"
