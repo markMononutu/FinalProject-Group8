@@ -1,5 +1,6 @@
 import React from 'react';
 import {StyleSheet, Text, TextInput, View} from 'react-native';
+import InputSpinner from 'react-native-input-spinner';
 
 const MenuCard = ({namaMenu, hargaMenu, gambar}) => {
   return (
@@ -19,15 +20,18 @@ const MenuCard = ({namaMenu, hargaMenu, gambar}) => {
           </View>
         </View>
 
-        <View style={styles.detail}>
-          <Text style={styles.nama}>{namaMenu}</Text>
-          <Text style={styles.harga}>{hargaMenu}</Text>
+        <View style={styles.cardWrapper}>
+          <View style={styles.detail}>
+            <Text style={styles.nama}>{namaMenu}</Text>
+            <Text style={styles.harga}>{hargaMenu}</Text>
+          </View>
+          <InputSpinner
+            style={styles.spinner}
+            skin="square"
+            fontSize={18}
+            buttonFontSize={20}
+          />
         </View>
-        <TextInput
-          style={styles.input}
-          placeholderTextColor="grey"
-          placeholder="jumlah"
-        />
       </View>
       <View
         style={{
@@ -49,9 +53,20 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     marginLeft: 10,
   },
+  cardWrapper: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  spinner: {
+    marginLeft: 140,
+    position: 'absolute',
+    padding: 10,
+    marginTop: 5,
+    backgroundColor: '#FAFAFA',
+  },
   nama: {
     marginTop: 10,
-    fontSize: 20,
+    fontSize: 17,
     fontWeight: '700',
   },
   harga: {
@@ -78,15 +93,5 @@ const styles = StyleSheet.create({
   imageWrapper: {
     marginTop: 7.5,
     marginBottom: 4,
-  },
-  input: {
-    flex: 1,
-    borderWidth: 1,
-    borderColor: '#DADADA',
-    borderRadius: 8,
-    marginVertical: 10,
-    color: 'black',
-    textAlign: 'center',
-    justifyContent: 'flex-end',
   },
 });
