@@ -1,8 +1,9 @@
 import React from 'react';
-import {StyleSheet, Text, TextInput, View} from 'react-native';
+import {Image, StyleSheet, Text, TextInput, View} from 'react-native';
 import InputSpinner from 'react-native-input-spinner';
+import {useState} from 'react/cjs/react.development';
 
-const MenuCard = ({namaMenu, hargaMenu, gambar}) => {
+const MenuCard = ({namaMenu, hargaMenu, source}) => {
   return (
     <View>
       <View
@@ -14,9 +15,7 @@ const MenuCard = ({namaMenu, hargaMenu, gambar}) => {
       <View style={styles.card}>
         <View style={styles.imageWrapper}>
           <View style={styles.borderImage}>
-            <View>
-              <Text style={styles.textImage}>{gambar}</Text>
-            </View>
+            <Image style={{width: 101, height: 64}} source={source} />
           </View>
         </View>
 
