@@ -65,7 +65,9 @@ const Profile = ({navigation, route}) => {
           <Text style={styles.labelnumber}>{users.phoneNumber}</Text>
           <Gap height={112} />
           <View style={styles.button}>
-            <Button label="SIGN OUT" color="#8C0900" />
+            <Button label="SIGN OUT" color="#8C0900"  
+            onSubmit={() => navigation.navigate('SignIn')}
+           />
             <Gap height={90} />
           </View>
         </View>
@@ -104,16 +106,12 @@ const styles = StyleSheet.create({
     color: 'rgba(0, 0, 0, 0.57)',
     marginLeft: 17,
     padding: 10,
-    width: 141,
-    height: 41,
   },
   labelnama: {
     fontSize: 18,
     color: 'black',
     marginLeft: 17,
     padding: 10,
-    width: 141,
-    height: 41,
     fontWeight: 'bold',
   },
   email: {
@@ -122,16 +120,13 @@ const styles = StyleSheet.create({
     color: 'rgba(0, 0, 0, 0.57)',
     marginLeft: 17,
     padding: 10,
-    width: 141,
-    height: 41,
+    
   },
   labelemail: {
     fontSize: 18,
     color: 'black',
     marginLeft: 17,
     padding: 10,
-    width: 141,
-    height: 41,
     fontWeight: 'bold',
   },
   phonenumber: {
@@ -140,16 +135,13 @@ const styles = StyleSheet.create({
     color: 'rgba(0, 0, 0, 0.57)',
     marginLeft: 17,
     padding: 10,
-    width: 141,
-    height: 41,
+   
   },
   labelnumber: {
     fontSize: 18,
     color: 'black',
     marginLeft: 17,
     padding: 10,
-    width: 141,
-    height: 41,
     fontWeight: 'bold',
   },
 
@@ -165,8 +157,10 @@ const styles = StyleSheet.create({
     elevation: 20,
   },
   button: {
+    marginTop: 30,
     marginLeft: 22,
     marginRight: 22,
+
   },
   nav: {
     backgroundColor: 'white',
