@@ -9,15 +9,16 @@ import {
   Button,
 } from '../../components';
 
-const Menu = ({navigation}) => {
+const Menu = ({navigation, route}) => {
+  const {uid} = route.params;
   return (
     <>
       <BottomNavigation
         Home={<HomeBold />}
         Order={<Ordericon />}
         Profile={<ProfileIcon />}
-        onPressOrder={() => navigation.navigate('OrderList')}
-        onPressProfile={() => navigation.navigate('Profile')}
+        onPressOrder={() => navigation.navigate('OrderList', {uid: uid})}
+        onPressProfile={() => navigation.navigate('Profile', {uid: uid})}
       />
       <View>
         <Header title="MENU" />
