@@ -1,7 +1,7 @@
 import React from 'react';
 import {Image, StyleSheet, Text, TextInput, View} from 'react-native';
 
-const MenuCard = ({namaMenu, hargaMenu, source, onChange, onsubmit}) => {
+const MenuCard = ({namaMenu, hargaMenu, source, onChange, value}) => {
   return (
     <View>
       <View
@@ -28,6 +28,7 @@ const MenuCard = ({namaMenu, hargaMenu, source, onChange, onsubmit}) => {
             placeholder="jumlah"
             keyboardType={'numeric'}
             onChange={onChange}
+            value={value}
           />
           {/* <Button label="OK" onSubmit={onsubmit} /> */}
         </View>
