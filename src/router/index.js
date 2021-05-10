@@ -30,12 +30,12 @@ const Router = () => {
       <Stack.Screen
         name="Profile"
         component={Profile}
-        options={{headerShown: false}}
+        options={{headerShown: false, animationEnabled: false}}
       />
-        <Stack.Screen
+      <Stack.Screen
         name="OrderList"
         component={OrderList}
-        options={{headerShown: false}}
+        options={{headerShown: false, animationEnabled: false}}
       />
     </Stack.Navigator>
   );
