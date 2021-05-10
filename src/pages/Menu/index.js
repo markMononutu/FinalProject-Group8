@@ -66,33 +66,41 @@ const Menu = ({navigation, route}) => {
   }, []);
 
   const updateMakanan = (itemMakanan, items) => {
-    const biaya = items.harga * items.jumlah;
-    const dataPesanMakan = {
-      namaMakanan: items.makanan,
-      hargaMakanan: items.harga,
-      jumlahMakanan: items.jumlah,
-      biaya: biaya,
-    };
+    if (jumlah != 0) {
+      const biaya = items.harga * jumlah;
+      const dataPesanMakan = {
+        namaMakanan: items.makanan,
+        hargaMakanan: items.harga,
+        jumlahMakanan: jumlah,
+        biaya: biaya,
+      };
+
+      firebase
+        .database()
+        .ref(`users/${uid}/daftarPesananMakanan`)
+        .push(dataPesanMakan);
+    }
     firebase.database().ref(`makanan/${itemMakanan}/jumlah`).set(jumlah);
-    firebase
-      .database()
-      .ref(`users/${uid}/daftarPesananMakanan`)
-      .push(dataPesanMakan);
+    setJumlah(0);
   };
 
   const updateMinuman = (itemMinuman, items) => {
-    const biaya = items.harga * items.jumlah;
-    const dataPesanMinum = {
-      namaMinuman: items.minuman,
-      hargaMinuman: items.harga,
-      jumlahMinuman: items.jumlah,
-      biaya: biaya,
-    };
+    if (jumlah != 0) {
+      const biaya = items.harga * jumlah;
+      const dataPesanMinum = {
+        namaMinuman: items.minuman,
+        hargaMinuman: items.harga,
+        jumlahMinuman: jumlah,
+        biaya: biaya,
+      };
+
+      firebase
+        .database()
+        .ref(`users/${uid}/daftarPesananMinuman`)
+        .push(dataPesanMinum);
+    }
     firebase.database().ref(`minuman/${itemMinuman}/jumlah`).set(jumlah);
-    firebase
-      .database()
-      .ref(`users/${uid}/daftarPesananMinuman`)
-      .push(dataPesanMinum);
+    setJumlah(0);
   };
   return (
     <>
@@ -117,6 +125,7 @@ const Menu = ({navigation, route}) => {
                   namaMenu={itemMakanan.makanan}
                   hargaMenu={`Rp.${itemMakanan.harga}`}
                   source={{uri: `data:image/jpeg;base64,${itemMakanan.photo}`}}
+                  value={jumlah}
                   onChange={value => {
                     setJumlah(parseInt(value.nativeEvent.text));
                   }}
@@ -143,6 +152,7 @@ const Menu = ({navigation, route}) => {
                   namaMenu={itemMinuman.minuman}
                   hargaMenu={`Rp.${itemMinuman.harga}`}
                   source={{uri: `data:image/jpeg;base64,${itemMinuman.photo}`}}
+                  value={jumlah}
                   onChange={value => {
                     setJumlah(parseInt(value.nativeEvent.text));
                   }}

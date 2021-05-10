@@ -157,7 +157,7 @@ const styles = StyleSheet.create({
     elevation: 20,
   },
   button: {
-    marginTop: 30,
+    marginTop: -30,
     marginLeft: 22,
     marginRight: 22,
   },
