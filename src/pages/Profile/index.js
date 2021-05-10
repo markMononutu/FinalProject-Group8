@@ -65,9 +65,11 @@ const Profile = ({navigation, route}) => {
           <Text style={styles.labelnumber}>{users.phoneNumber}</Text>
           <Gap height={112} />
           <View style={styles.button}>
-            <Button label="SIGN OUT" color="#8C0900"  
-            onSubmit={() => navigation.navigate('SignIn')}
-           />
+            <Button
+              label="SIGN OUT"
+              color="#8C0900"
+              onSubmit={() => navigation.navigate('SignIn')}
+            />
             <Gap height={90} />
           </View>
         </View>
@@ -120,7 +122,6 @@ const styles = StyleSheet.create({
     color: 'rgba(0, 0, 0, 0.57)',
     marginLeft: 17,
     padding: 10,
-    
   },
   labelemail: {
     fontSize: 18,
@@ -135,7 +136,6 @@ const styles = StyleSheet.create({
     color: 'rgba(0, 0, 0, 0.57)',
     marginLeft: 17,
     padding: 10,
-   
   },
   labelnumber: {
     fontSize: 18,
@@ -160,7 +160,6 @@ const styles = StyleSheet.create({
     marginTop: 30,
     marginLeft: 22,
     marginRight: 22,
-
   },
   nav: {
     backgroundColor: 'white',

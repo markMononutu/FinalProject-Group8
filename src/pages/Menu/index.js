@@ -1,5 +1,11 @@
 import React, {useState, useEffect} from 'react';
-import {ScrollView, StyleSheet, Text, View} from 'react-native';
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import {HomeBold, Ordericon, ProfileIcon} from '../../assets';
 import {
   BottomNavigation,
@@ -16,8 +22,8 @@ const Menu = ({navigation, route}) => {
   const [productMakanan, setProductMakanan] = useState([]);
   const [productMinuman, setProductMinuman] = useState([]);
 
-  const [gambarMakanan, setGambarMakanan] = useState({});
-  const [gambarMinuman, setGambarMinuman] = useState({});
+  const [jumlah, setJumlah] = useState(0);
+
   useEffect(() => {
     //makanan
     firebase
@@ -28,16 +34,13 @@ const Menu = ({navigation, route}) => {
           //ubah menjadi array object
           const rawData = res.val();
           const productArray = [];
-          Object.keys(rawData).map(item => {
+          Object.keys(rawData).map(itemMakanan => {
             productArray.push({
-              id: item,
-              ...rawData[item],
+              id: itemMakanan,
+              ...rawData[itemMakanan],
             });
           });
           setProductMakanan(productArray);
-          // const gambar = `data:image/jpeg;base64, ${productMakanan.photo}`;
-          // setGambarMakanan(...res.val(), ());
-          console.log(productArray);
         }
       });
 
@@ -50,10 +53,10 @@ const Menu = ({navigation, route}) => {
           //ubah menjadi array object
           const rawData = res.val();
           const productArray = [];
-          Object.keys(rawData).map(item => {
+          Object.keys(rawData).map(itemMinuman => {
             productArray.push({
-              id: item,
-              ...rawData[item],
+              id: itemMinuman,
+              ...rawData[itemMinuman],
             });
           });
           setProductMinuman(productArray);
@@ -61,6 +64,36 @@ const Menu = ({navigation, route}) => {
         }
       });
   }, []);
+
+  const updateMakanan = (itemMakanan, items) => {
+    const biaya = items.harga * items.jumlah;
+    const dataPesanMakan = {
+      namaMakanan: items.makanan,
+      hargaMakanan: items.harga,
+      jumlahMakanan: items.jumlah,
+      biaya: biaya,
+    };
+    firebase.database().ref(`makanan/${itemMakanan}/jumlah`).set(jumlah);
+    firebase
+      .database()
+      .ref(`users/${uid}/daftarPesananMakanan`)
+      .push(dataPesanMakan);
+  };
+
+  const updateMinuman = (itemMinuman, items) => {
+    const biaya = items.harga * items.jumlah;
+    const dataPesanMinum = {
+      namaMinuman: items.minuman,
+      hargaMinuman: items.harga,
+      jumlahMinuman: items.jumlah,
+      biaya: biaya,
+    };
+    firebase.database().ref(`minuman/${itemMinuman}/jumlah`).set(jumlah);
+    firebase
+      .database()
+      .ref(`users/${uid}/daftarPesananMinuman`)
+      .push(dataPesanMinum);
+  };
   return (
     <>
       <BottomNavigation
@@ -74,29 +107,65 @@ const Menu = ({navigation, route}) => {
         <Header title="MENU" />
         <Gap height={31} />
         <View style={{borderBottomWidth: 1, borderBottomColor: '#DADADA'}} />
-        <ScrollView>
+        <ScrollView showsVerticalScrollIndicator={false}>
           <View style={styles.menuWrapper}>
             {/* Makanan */}
             <Text style={styles.kategori}>FOOD</Text>
-            {productMakanan.map(item => (
-              <MenuCard
-                namaMenu={item.makanan}
-                hargaMenu={item.harga}
-                source={{uri: `data:image/jpeg;base64,${item.photo}`}}
-              />
+            {productMakanan.map(itemMakanan => (
+              <View>
+                <MenuCard
+                  namaMenu={itemMakanan.makanan}
+                  hargaMenu={`Rp.${itemMakanan.harga}`}
+                  source={{uri: `data:image/jpeg;base64,${itemMakanan.photo}`}}
+                  onChange={value => {
+                    setJumlah(parseInt(value.nativeEvent.text));
+                  }}
+                />
+                <View>
+                  <TouchableOpacity
+                    style={styles.tombol}
+                    onPress={() => {
+                      console.log(itemMakanan);
+                      updateMakanan(itemMakanan.id, itemMakanan);
+                    }}>
+                    <Text>Masukkan Keranjang</Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
             ))}
+
             <Gap height={32.5} />
             {/* Minuman */}
             <Text style={styles.kategori}>DRINK</Text>
-            {productMinuman.map(item => (
-              <MenuCard
-                namaMenu={item.minuman}
-                hargaMenu={item.harga}
-                source={{uri: `data:image/jpeg;base64,${item.photo}`}}
-              />
+            {productMinuman.map(itemMinuman => (
+              <View>
+                <MenuCard
+                  namaMenu={itemMinuman.minuman}
+                  hargaMenu={`Rp.${itemMinuman.harga}`}
+                  source={{uri: `data:image/jpeg;base64,${itemMinuman.photo}`}}
+                  onChange={value => {
+                    setJumlah(parseInt(value.nativeEvent.text));
+                  }}
+                />
+                <View>
+                  <TouchableOpacity
+                    style={styles.tombol}
+                    onPress={() => {
+                      console.log(itemMinuman);
+                      updateMinuman(itemMinuman.id, itemMinuman);
+                    }}>
+                    <Text>Masukkan Keranjang</Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
             ))}
             <Gap height={37.5} />
-            <Button label="ORDER" />
+            <View style={styles.button}>
+              <Button
+                label="ORDER"
+                onSubmit={() => navigation.navigate('OrderList', {uid: uid})}
+              />
+            </View>
           </View>
         </ScrollView>
       </View>
@@ -115,5 +184,16 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     marginBottom: 11,
+  },
+  button: {
+    marginBottom: 150,
+  },
+  tombol: {
+    borderRadius: 8,
+    alignItems: 'center',
+    color: 'white',
+    height: 35,
+    backgroundColor: 'grey',
+    padding: 5,
   },
 });

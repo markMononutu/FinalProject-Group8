@@ -1,9 +1,7 @@
 import React from 'react';
 import {Image, StyleSheet, Text, TextInput, View} from 'react-native';
-import InputSpinner from 'react-native-input-spinner';
-import {useState} from 'react/cjs/react.development';
 
-const MenuCard = ({namaMenu, hargaMenu, source}) => {
+const MenuCard = ({namaMenu, hargaMenu, source, onChange, onsubmit}) => {
   return (
     <View>
       <View
@@ -24,12 +22,14 @@ const MenuCard = ({namaMenu, hargaMenu, source}) => {
             <Text style={styles.nama}>{namaMenu}</Text>
             <Text style={styles.harga}>{hargaMenu}</Text>
           </View>
-          <InputSpinner
-            style={styles.spinner}
-            skin="square"
-            fontSize={18}
-            buttonFontSize={20}
+          <TextInput
+            style={styles.input}
+            placeholderTextColor="grey"
+            placeholder="jumlah"
+            keyboardType={'numeric'}
+            onChange={onChange}
           />
+          {/* <Button label="OK" onSubmit={onsubmit} /> */}
         </View>
       </View>
       <View
@@ -92,5 +92,16 @@ const styles = StyleSheet.create({
   imageWrapper: {
     marginTop: 7.5,
     marginBottom: 4,
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: '#DADADA',
+    borderRadius: 8,
+    marginVertical: 10,
+    marginLeft: 180,
+    color: 'black',
+    textAlign: 'center',
+    justifyContent: 'flex-end',
+    position: 'absolute',
   },
 });
